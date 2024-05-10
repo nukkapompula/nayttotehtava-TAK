@@ -4,7 +4,7 @@ Bash-skripti lukee käyttäjien tiedot CSV-tiedostosta ja luo kullekin käyttäj
 
 Huomioitavaa:
 
-- CSV-tiedosto **students.csv** on muotoa `etunimi,sukunimi,salasana,ryhmä`.
+- CSV-tiedoston **students.csv** rivit ovat muotoa `etunimi,sukunimi,salasana,ryhmä`.
 
 - Luotava kotihakemisto sisältää kansion *public_html*, josta löytyy puolestaan *index.html*. Sivu kertoo kuka sen omistaa.
 
