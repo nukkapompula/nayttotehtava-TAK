@@ -11,7 +11,7 @@ cat > index.html << EOF
                 <title>Index</title>
         </head>
         <body>
-                <p>Tämän sivun omistaa käyttäjä <b>$1 $2.</b></p>
+                <p>Tämän sivun omistaa käyttäjä <b>$1 $2</b>.</p>
         </body>
 </html>
 EOF
@@ -24,8 +24,8 @@ do
         sudo usermod -c "$firstName $lastName $group" $firstName.$lastName
         sudo usermod -g testi $firstName.$lastName
         sudo chpasswd $firstName.$lastName:$password
+        sudo chmod -R ug+x /home/$firstName.$lastName
+        sudo chmod -R o-rwx /home/$firstName.$lastName
         sudo mkdir /home/$firstName.$lastName/public_html
         create_html $firstName $lastName
-        chmod -R ug+x /home/$firstName.$lastName
-        chmod -R o-rwx /home/$firstName.$lastName
 done < <(tail -n +2 $1)
