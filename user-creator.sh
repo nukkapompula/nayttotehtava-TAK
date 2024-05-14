@@ -2,6 +2,7 @@
 
 function create_html {
 sudo touch /home/$1.$2/public_html/index.html
+sudo chmod a+rwx /home/$1.$2/public_html/index.html
 sudo cat > /home/$1.$2/public_html/index.html << EOF
 <!DOCTYPE html>
 <html lang="en">
