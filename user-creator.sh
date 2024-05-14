@@ -1,8 +1,8 @@
 #!/bin/bash
 
 function create_html {
-touch /home/$1.$2/public_html/index.html
-cat > index.html << EOF
+sudo touch /home/$1.$2/public_html/index.html
+sudo cat > /home/$1.$2/public_html/index.html << EOF
 <!DOCTYPE html>
 <html lang="en">
         <head>
@@ -23,9 +23,10 @@ do
         sudo useradd -m $firstName.$lastName
         sudo usermod -c "$firstName $lastName $group" $firstName.$lastName
         sudo usermod -g testi $firstName.$lastName
-        sudo chpasswd $firstName.$lastName:$password
-        sudo chmod -R ug+x /home/$firstName.$lastName
-        sudo chmod -R o-rwx /home/$firstName.$lastName
+        echo "$firstName.$lastName:$password" | sudo chpasswd
+        sudo chmod -R a+rwx /home/$firstName.$lastName
+#        sudo chmod -R ug+x /home/$firstName.$lastName
+#        sudo chmod -R o-rwx /home/$firstName.$lastName
         sudo mkdir /home/$firstName.$lastName/public_html
         create_html $firstName $lastName
 done < <(tail -n +2 $1)
