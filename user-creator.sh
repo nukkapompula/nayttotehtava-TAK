@@ -24,10 +24,11 @@ do
         sudo useradd -m $firstName.$lastName
         sudo usermod -c "$firstName $lastName $group" $firstName.$lastName
         sudo usermod -g testi $firstName.$lastName
+        sudo usermod -a -G testi $USER
         echo "$firstName.$lastName:$password" | sudo chpasswd
+        sudo chgrp -R testi /home/$firstName.$lastName
         sudo chmod -R a+rwx /home/$firstName.$lastName
-#        sudo chmod -R ug+x /home/$firstName.$lastName
-#        sudo chmod -R o-rwx /home/$firstName.$lastName
         sudo mkdir /home/$firstName.$lastName/public_html
         create_html $firstName $lastName
+#        sudo chmod -R o-rwx /home/$firstName.$lastName
 done < <(tail -n +2 $1)
