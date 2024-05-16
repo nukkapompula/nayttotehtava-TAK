@@ -1,9 +1,7 @@
 #!/bin/bash
 
 function create_html {
-sudo touch /home/$1.$2/public_html/index.html
-sudo chmod a+rwx /home/$1.$2/public_html/index.html
-sudo cat > /home/$1.$2/public_html/index.html << EOF
+cat > ./public_html/index.html << EOF
 <!DOCTYPE html>
 <html lang="en">
         <head>
@@ -12,7 +10,7 @@ sudo cat > /home/$1.$2/public_html/index.html << EOF
                 <title>Index</title>
         </head>
         <body>
-                <p>Tämän sivun omistaa käyttäjä <b>$1 $2</b>.</p>
+                <p>This page belongs to user <b>$1 $2</b>.</p>
         </body>
 </html>
 EOF
@@ -26,9 +24,9 @@ do
         sudo usermod -g testi $firstName.$lastName
         sudo usermod -a -G testi $USER
         echo "$firstName.$lastName:$password" | sudo chpasswd
-        sudo chgrp -R testi /home/$firstName.$lastName
-        sudo chmod -R a+rwx /home/$firstName.$lastName
-        sudo mkdir /home/$firstName.$lastName/public_html
+        mkdir public_html
         create_html $firstName $lastName
-#        sudo chmod -R o-rwx /home/$firstName.$lastName
+        sudo mv -t /home/$firstName.$lastName public_html
+        sudo chmod -R ug+rwx,o-rwx /home/$firstName.$lastName
+        sudo chgrp -R testi /home/$firstName.$lastName
 done < <(tail -n +2 $1)
