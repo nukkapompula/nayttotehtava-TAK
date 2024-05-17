@@ -10,7 +10,7 @@ cat > ./public_html/index.html << EOF
                 <title>Index</title>
         </head>
         <body>
-                <p>This page belongs to user <b>$1 $2</b>.</p>
+                <p>This page belongs to user <b>$1.$2</b></p>
         </body>
 </html>
 EOF
@@ -27,6 +27,6 @@ do
         mkdir public_html
         create_html $firstName $lastName
         sudo mv -t /home/$firstName.$lastName public_html
-        sudo chmod -R ug+rwx,o-rwx /home/$firstName.$lastName
         sudo chgrp -R $group /home/$firstName.$lastName
+        sudo chmod -R ug+rwx,o-rwx /home/$firstName.$lastName
 done < <(tail -n +2 $1)
