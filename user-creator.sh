@@ -17,12 +17,12 @@ EOF
 }
 
 function create_conf {
-cat > ./$1-$2.conf << EOF
+cat > ./$1.$2.conf << EOF
 <VirtualHost *:80>
         ServerAdmin webmaster@localhost
-        ServerName $1-$2
-        ServerAlias www.$1-$2
-        DocumentRoot /var/www/$1-$2
+        ServerName $1.$2
+        ServerAlias www.$1.$2
+        DocumentRoot /var/www/$1.$2/public_html
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
@@ -40,12 +40,12 @@ do
         echo "$firstName.$lastName:$password" | sudo chpasswd
         mkdir public_html
         create_html $firstName $lastName
-        sudo mkdir /var/www/$firstName-$lastName
-        sudo mv -t /var/www/$firstName-$lastName public_html
-        sudo chgrp -R $group /var/www/$firstName-$lastName
-        sudo chmod -R ug+rwx,o-rwx /var/www/$firstName-$lastName
+        sudo mkdir /var/www/$firstName.$lastName
+        sudo mv -t /var/www/$firstName.$lastName public_html
+        sudo chgrp -R $group /var/www/$firstName.$lastName
+        sudo chmod -R ug+rwx,o-rwx /var/www/$firstName.$lastName
         create_conf $firstName $lastName
-        sudo mv $firstName-$lastName.conf /etc/apache2/sites-available
-        sudo a2ensite $firstName-$lastName.conf
+        sudo mv $firstName.$lastName.conf /etc/apache2/sites-available
+        sudo a2ensite $firstName.$lastName.conf
 done < <(tail -n +2 $1)
 sudo systemctl restart apache2
