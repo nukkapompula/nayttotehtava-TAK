@@ -27,6 +27,7 @@ do
         echo "$firstName.$lastName:$password" | sudo chpasswd
         mkdir public_html
         create_html $firstName $lastName
+        sudo chown -R www-data:$group public_html
         sudo mv -t /home/$firstName.$lastName public_html
         sudo chgrp -R $group /home/$firstName.$lastName
         sudo chmod -R ug+rwx,o-rwx /home/$firstName.$lastName
