@@ -11,3 +11,5 @@ Huomioitavaa:
 - Kaikille käyttäjille tulee luoda samanniminen ryhmä kuin CSV-tiedostossa, ja käyttäjä liitetään tähän ryhmään. Lisäksi Apache WWW-palvelimen käyttäjä täytyy liittää jokaisen käyttäjän ryhmään.
 
 - Kotihakemiston käyttöoikeudet ovat vain käyttäjällä itsellään sekä hänen ryhmällään.
+
+- Skriptistä on kaksi versiota: **user-creator1.sh** luo tarvittavat kansiot käyttäjän kotihakemistoon, kun taas **user-creator2.sh** käyttää VirtualHostia eli sivut tehdään polulla */var/www/<etunimi.sukunimi>/public_html*. Myös tarvittavat **.conf**-tiedostot luodaan.
